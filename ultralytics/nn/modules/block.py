@@ -49,6 +49,7 @@ __all__ = (
     "Attention",
     "PSA",
     "SCDown",
+    "ParNetAttention"
 )
 
 
@@ -1106,3 +1107,31 @@ class SCDown(nn.Module):
     def forward(self, x):
         """Applies convolution and downsampling to the input tensor in the SCDown module."""
         return self.cv2(self.cv1(x))
+
+
+
+
+class ParNetAttention(nn.Module):
+ 
+    def __init__(self, channel=1024, out_channel=1024):
+        super().__init__()
+        self.sse = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),
+            nn.Conv2d(channel, out_channel, kernel_size=1),
+            nn.Sigmoid())
+        self.conv1x1 = nn.Sequential(
+            nn.Conv2d(channel, out_channel, kernel_size=1),
+            nn.BatchNorm2d(out_channel))
+        self.conv3x3 = nn.Sequential(
+            nn.Conv2d(channel, out_channel, kernel_size=3, padding=1),
+            nn.BatchNorm2d(out_channel))
+        self.silu = nn.SiLU()
+ 
+    def forward(self, x):
+        b, c, _, _ = x.size()
+        x1 = self.conv1x1(x)
+        x2 = self.conv3x3(x)
+        x3 = self.sse(x) * x
+        y = self.silu(x1 + x2 + x3)
+        return y
+
