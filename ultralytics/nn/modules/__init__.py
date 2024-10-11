@@ -57,7 +57,9 @@ from .block import (
     ResNetLayer,
     SCDown,
     ParNetAttention,
-    Concat_BiFPN
+    Concat_BiFPN,
+    CARAFE
+
 
 )
 from .conv import (
@@ -160,6 +162,8 @@ __all__ = (
     "Attention",
     "PSA",
     "ParNetAttention",
-    "Concat_BiFPN"
+    "Concat_BiFPN",
+    "CARAFE"
+
 
 )
