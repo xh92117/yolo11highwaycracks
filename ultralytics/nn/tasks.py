@@ -62,7 +62,9 @@ from ultralytics.nn.modules import (
     WorldDetect,
     v10Detect,
     ParNetAttention,
-    Concat_BiFPN
+    Concat_BiFPN,
+    CARAFE
+
 
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
@@ -1002,7 +1004,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             PSA,
             SCDown,
             C2fCIB,
-            ParNetAttention
+            ParNetAttention,
+            CARAFE
+
         }:
             c1, c2 = ch[f], args[0]
             if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
