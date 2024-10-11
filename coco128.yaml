@@ -1,5 +1,5 @@
 # dataset path
-path: /content/ultralyticsPro0817/
+path: /content/ultralytics/
 train: ./data/images/train
 val: ./data/images/val
 test: ./data/images/test
