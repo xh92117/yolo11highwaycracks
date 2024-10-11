@@ -56,7 +56,9 @@ from .block import (
     RepVGGDW,
     ResNetLayer,
     SCDown,
-    ParNetAttention
+    ParNetAttention,
+    Concat_BiFPN
+
 )
 from .conv import (
     CBAM,
@@ -157,5 +159,7 @@ __all__ = (
     "C2fCIB",
     "Attention",
     "PSA",
-    "ParNetAttention"
+    "ParNetAttention",
+    "Concat_BiFPN"
+
 )
