@@ -66,7 +66,9 @@ from ultralytics.nn.modules import (
     CARAFE,
     BAMBlock,
     CoTAttention,
-    PSAttention
+    PSAttention,
+    SpatialGroupEnhance
+
 
 
 
@@ -1073,6 +1075,12 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is Concat_BiFPN:
             c2 = sum(ch[x] for x in f)
 
+
+        elif m is SpatialGroupEnhance:
+            c1, c2 = ch[f], args[0]
+            if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, *args[1:]]
 
         elif m is PSAttention:
             c1, c2 = ch[f], args[0]
