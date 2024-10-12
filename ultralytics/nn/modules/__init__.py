@@ -61,7 +61,9 @@ from .block import (
     CARAFE,
     BAMBlock,
     CoTAttention,
-    PSAttention
+    PSAttention,
+    SpatialGroupEnhance
+
 
 
 
@@ -172,7 +174,9 @@ __all__ = (
     "CARAFE",
     "BAMBlock",
     "CoTAttention",
-    "PSAttention"
+    "PSAttention",
+    "SpatialGroupEnhance"
+
 
 
 
