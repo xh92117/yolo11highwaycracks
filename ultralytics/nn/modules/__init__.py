@@ -60,7 +60,9 @@ from .block import (
     Concat_BiFPN,
     CARAFE,
     BAMBlock,
-    CoTAttention
+    CoTAttention,
+    PSAttention
+
 
 
 
@@ -169,7 +171,9 @@ __all__ = (
     "Concat_BiFPN",
     "CARAFE",
     "BAMBlock",
-    "CoTAttention"
+    "CoTAttention",
+    "PSAttention"
+
 
 
 
