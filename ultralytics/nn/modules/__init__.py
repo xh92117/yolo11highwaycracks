@@ -59,7 +59,9 @@ from .block import (
     ParNetAttention,
     Concat_BiFPN,
     CARAFE,
-    BAMBlock
+    BAMBlock,
+    CoTAttention
+
 
 
 
@@ -166,7 +168,9 @@ __all__ = (
     "ParNetAttention",
     "Concat_BiFPN",
     "CARAFE",
-    "BAMBlock"
+    "BAMBlock",
+    "CoTAttention"
+
 
 
 
