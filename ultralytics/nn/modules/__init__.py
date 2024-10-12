@@ -58,7 +58,9 @@ from .block import (
     SCDown,
     ParNetAttention,
     Concat_BiFPN,
-    CARAFE
+    CARAFE,
+    BAMBlock
+
 
 
 )
@@ -163,7 +165,9 @@ __all__ = (
     "PSA",
     "ParNetAttention",
     "Concat_BiFPN",
-    "CARAFE"
+    "CARAFE",
+    "BAMBlock"
+
 
 
 )
