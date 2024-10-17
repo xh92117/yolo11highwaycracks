@@ -13,6 +13,11 @@ import torch.nn as nn
 
 from ultralytics.nn.modules.Biformer import *
 
+
+from ultralytics.nn.modules.DynamicConvModule import *
+
+
+
 from ultralytics.nn.modules import (
     AIFI,
     C1,
@@ -1017,7 +1022,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2fCIB,
             ParNetAttention,
             CARAFE,
-            C2PSA_Biformer
+            C2PSA_Biformer,
+            C3k2_GhostModule
+
 
 
         }:
@@ -1046,6 +1053,8 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C2fPSA,
                 C2fCIB,
                 C2PSA,
+                C3k2_GhostModule
+
             }:
                 args.insert(2, n)  # number of repeats
                 n = 1
@@ -1101,7 +1110,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-         elif m in {BiLevelRoutingAttention}:
+        elif m in {BiLevelRoutingAttention}:
             c2 = ch[f]
             args = [c2, *args]
    
