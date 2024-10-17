@@ -10,6 +10,9 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
+
+from ultralytics.nn.modules.Biformer import *
+
 from ultralytics.nn.modules import (
     AIFI,
     C1,
@@ -1013,7 +1016,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             SCDown,
             C2fCIB,
             ParNetAttention,
-            CARAFE
+            CARAFE,
+            C2PSA_Biformer
+
 
         }:
             c1, c2 = ch[f], args[0]
@@ -1094,6 +1099,12 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 c2 = make_divisible(min(c2, max_channels) * width, 8)
             args = [c1, *args[1:]]
 
+
+
+         elif m in {BiLevelRoutingAttention}:
+            c2 = ch[f]
+            args = [c2, *args]
+   
 
         elif m in {BAMBlock}:
             c1, c2 = ch[f], args[0]
