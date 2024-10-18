@@ -16,7 +16,7 @@ from ultralytics.nn.modules.Biformer import *
 
 from ultralytics.nn.modules.DynamicConvModule import *
 
-
+from ultralytics.nn.modules.RCSOSA import *
 
 from ultralytics.nn.modules import (
     AIFI,
@@ -1023,7 +1023,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ParNetAttention,
             CARAFE,
             C2PSA_Biformer,
-            C3k2_GhostModule
+            C3k2_GhostModule,
+            C3k2_RepVGG, 
+            RCSOSA
+
 
 
 
@@ -1053,7 +1056,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C2fPSA,
                 C2fCIB,
                 C2PSA,
-                C3k2_GhostModule
+                C3k2_GhostModule,
+                C3k2_RepVGG, 
+                RCSOSA
+
 
             }:
                 args.insert(2, n)  # number of repeats
