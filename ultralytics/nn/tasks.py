@@ -17,6 +17,9 @@ from ultralytics.nn.modules.Biformer import *
 from ultralytics.nn.modules.DAttention import *
 
 
+from ultralytics.nn.modules. DWRSeg import *
+
+
 
 from ultralytics.nn.modules.DynamicConvModule import *
 
@@ -1030,7 +1033,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_GhostModule,
             C3k2_RepVGG, 
             RCSOSA,
-            C2PSA_DAT
+            C2PSA_DAT,
+            C3k2_DWRSeg
+
 
 
 
@@ -1064,7 +1069,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C2PSA,
                 C3k2_GhostModule,
                 C3k2_RepVGG, 
-                RCSOSA
+                RCSOSA, 
+                C3k2_DWRSeg
+
                
 
 
