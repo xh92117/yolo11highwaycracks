@@ -20,6 +20,9 @@ from ultralytics.nn.modules.DAttention import *
 from ultralytics.nn.modules. DWRSeg import *
 
 
+from ultralytics.nn.modules.FocalModulation import *
+
+
 
 from ultralytics.nn.modules.DynamicConvModule import *
 
@@ -1131,7 +1134,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation}:
             c2 = ch[f]
             args = [c2, *args]
    
