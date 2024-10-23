@@ -27,6 +27,11 @@ from ultralytics.nn.modules.FocalModulation import *
 from ultralytics.nn.modules.TripletAttention import *
 
 
+from ultralytics.nn.modules.SENetV2 import *
+
+
+
+
 from ultralytics.nn.modules.DynamicConvModule import *
 
 from ultralytics.nn.modules.RCSOSA import *
@@ -1041,7 +1046,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             RCSOSA,
             C2PSA_DAT,
             C3k2_DWRSeg,
-            C2PSA_TripleAttention
+            C2PSA_TripleAttention,
+            C2PSA_SENetV2, 
+            SPPFSENetV2
+
 
 
 
@@ -1139,7 +1147,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2}:
             c2 = ch[f]
             args = [c2, *args]
    
