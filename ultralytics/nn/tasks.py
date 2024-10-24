@@ -36,7 +36,7 @@ from ultralytics.nn.modules.FasterBlock import *
 
 from ultralytics.nn.modules.KANConv2Dlayers import *
 
-
+from ultralytics.nn.modules.AKConv import *
 
 from ultralytics.nn.modules.DynamicConvModule import *
 
@@ -1064,7 +1064,12 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ChebyKANConv2d, 
             JacobiKANConv2d, 
             FastKANConv2d,
-            GRAMKANConv2d
+            GRAMKANConv2d,
+            AKConv, 
+            C3k2_AKConv
+
+
+
 
 
 
@@ -1105,7 +1110,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_RepVGG, 
                 RCSOSA, 
                 C3k2_DWRSeg,
-                C3k2_FasterBlock
+                C3k2_FasterBlock,
+                C3k2_AKConv
+
 
 
                
