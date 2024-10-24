@@ -34,6 +34,10 @@ from ultralytics.nn.modules.SENetV2 import *
 from ultralytics.nn.modules.FasterBlock import *
 
 
+from ultralytics.nn.modules.KANConv2Dlayers import *
+
+
+
 from ultralytics.nn.modules.DynamicConvModule import *
 
 from ultralytics.nn.modules.RCSOSA import *
@@ -1051,7 +1055,17 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_TripleAttention,
             C2PSA_SENetV2, 
             SPPFSENetV2,
-            C3k2_FasterBlock
+            C3k2_FasterBlock,
+            RBFKANConv2d, 
+            ReLUKANConv2d, 
+            KANConv2d, 
+            FasterKANConv2d, 
+            WavKANConv2d, 
+            ChebyKANConv2d, 
+            JacobiKANConv2d, 
+            FastKANConv2d,
+            GRAMKANConv2d
+
 
 
 
