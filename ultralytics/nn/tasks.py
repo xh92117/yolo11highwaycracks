@@ -31,6 +31,8 @@ from ultralytics.nn.modules.SENetV2 import *
 
 
 
+from ultralytics.nn.modules.FasterBlock import *
+
 
 from ultralytics.nn.modules.DynamicConvModule import *
 
@@ -1048,7 +1050,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DWRSeg,
             C2PSA_TripleAttention,
             C2PSA_SENetV2, 
-            SPPFSENetV2
+            SPPFSENetV2,
+            C3k2_FasterBlock
+
 
 
 
@@ -1086,7 +1090,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_GhostModule,
                 C3k2_RepVGG, 
                 RCSOSA, 
-                C3k2_DWRSeg
+                C3k2_DWRSeg,
+                C3k2_FasterBlock
+
 
                
 
