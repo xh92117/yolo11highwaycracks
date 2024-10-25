@@ -40,6 +40,11 @@ from ultralytics.nn.modules.AKConv import *
 
 from ultralytics.nn.modules.DynamicConvModule import *
 
+
+from ultralytics.nn.modules.ACmix import *
+
+
+
 from ultralytics.nn.modules.RCSOSA import *
 
 from ultralytics.nn.modules import (
@@ -1066,7 +1071,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             FastKANConv2d,
             GRAMKANConv2d,
             AKConv, 
-            C3k2_AKConv
+            C3k2_AKConv,
+            C2PSA_ACmix
+
 
 
 
@@ -1174,7 +1181,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix}:
             c2 = ch[f]
             args = [c2, *args]
    
