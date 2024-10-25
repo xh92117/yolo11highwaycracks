@@ -41,7 +41,7 @@ from ultralytics.nn.modules.AKConv import *
 from ultralytics.nn.modules.DynamicConvModule import *
 
 
-from ultralytics.nn.modules.ACmix import *
+from ultralytics.nn.modules.AcMix import *
 
 
 
