@@ -46,6 +46,9 @@ from ultralytics.nn.modules.AcMix import *
 from ultralytics.nn.modules.EMA import *
 
 
+
+from ultralytics.nn.modules.MSDA import *
+
 from ultralytics.nn.modules.RCSOSA import *
 
 from ultralytics.nn.modules import (
@@ -1074,7 +1077,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             AKConv, 
             C3k2_AKConv,
             C2PSA_ACmix,
-            C2PSA_EMA
+            C2PSA_EMA,
+            C2PSA_MSDA
+
 
 
 
@@ -1184,7 +1189,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention}:
             c2 = ch[f]
             args = [c2, *args]
    
