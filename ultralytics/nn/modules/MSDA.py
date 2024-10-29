@@ -1,24 +1,72 @@
 import torch
 import torch.nn as nn
  
-__all__ = ['SEAM', 'C2PSA_SENetV1']
+__all__ = ['MultiDilatelocalAttention', 'C2PSA_MSDA']
  
-class SELayerV1(nn.Module):
-    def __init__(self, channel, reduction=16):
-        super(SELayerV1, self).__init__()
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)
-        self.fc = nn.Sequential(
-            nn.Linear(channel, channel // reduction, bias=False),
-            nn.ReLU(inplace=True),
-            nn.Linear(channel // reduction, channel, bias=False),
-            nn.Sigmoid()
-        )
+ 
+class DilateAttention(nn.Module):
+    "Implementation of Dilate-attention"
+ 
+    def __init__(self, head_dim, qk_scale=None, attn_drop=0, kernel_size=3, dilation=1):
+        super().__init__()
+        self.head_dim = head_dim
+        self.scale = qk_scale or head_dim ** -0.5
+        self.kernel_size = kernel_size
+        self.unfold = nn.Unfold(kernel_size, dilation, dilation * (kernel_size - 1) // 2, 1)
+        self.attn_drop = nn.Dropout(attn_drop)
+ 
+    def forward(self, q, k, v):
+        # B, C//3, H, W
+        B, d, H, W = q.shape
+        q = q.reshape([B, d // self.head_dim, self.head_dim, 1, H * W]).permute(0, 1, 4, 3, 2)  # B,h,N,1,d
+        k = self.unfold(k).reshape(
+            [B, d // self.head_dim, self.head_dim, self.kernel_size * self.kernel_size, H * W]).permute(0, 1, 4, 2,
+                                                                                                        3)  # B,h,N,d,k*k
+        attn = (q @ k) * self.scale  # B,h,N,1,k*k
+        attn = attn.softmax(dim=-1)
+        attn = self.attn_drop(attn)
+        v = self.unfold(v).reshape(
+            [B, d // self.head_dim, self.head_dim, self.kernel_size * self.kernel_size, H * W]).permute(0, 1, 4, 3,
+                                                                                                        2)  # B,h,N,k*k,d
+        x = (attn @ v).transpose(1, 2).reshape(B, H, W, d)
+        return x
+ 
+ 
+class MultiDilatelocalAttention(nn.Module):
+    "Implementation of Dilate-attention"
+ 
+    def __init__(self, dim, num_heads=8, qkv_bias=True, qk_scale=None,
+                 attn_drop=0., proj_drop=0., kernel_size=3, dilation=[1, 2, 3, 4]):
+        super().__init__()
+        self.dim = dim
+        self.num_heads = num_heads
+        head_dim = dim // num_heads
+        self.dilation = dilation
+        self.kernel_size = kernel_size
+        self.scale = qk_scale or head_dim ** -0.5
+        self.num_dilation = len(dilation)
+        assert num_heads % self.num_dilation == 0, f"num_heads{num_heads} must be the times of num_dilation{self.num_dilation}!!"
+        self.qkv = nn.Conv2d(dim, dim * 3, 1, bias=qkv_bias)
+        self.dilate_attention = nn.ModuleList(
+            [DilateAttention(head_dim, qk_scale, attn_drop, kernel_size, dilation[i])
+             for i in range(self.num_dilation)])
+        self.proj = nn.Linear(dim, dim)
+        self.proj_drop = nn.Dropout(proj_drop)
  
     def forward(self, x):
-        b, c, _, _ = x.size()
-        y = self.avg_pool(x).view(b, c)
-        y = self.fc(y).view(b, c, 1, 1)
-        return x * y.expand_as(x)
+        B, C, H, W = x.shape
+        # x = x.permute(0, 3, 1, 2)# B, C, H, W
+        y = x.clone()
+        qkv = self.qkv(x).reshape(B, 3, self.num_dilation, C // self.num_dilation, H, W).permute(2, 1, 0, 3, 4, 5)
+        # num_dilation,3,B,C//num_dilation,H,W
+        y1 = y.reshape(B, self.num_dilation, C // self.num_dilation, H, W).permute(1, 0, 3, 4, 2)
+        # num_dilation, B, H, W, C//num_dilation
+        for i in range(self.num_dilation):
+            y1[i] = self.dilate_attention[i](qkv[i][0], qkv[i][1], qkv[i][2])  # B, H, W,C//num_dilation
+        y2 = y1.permute(1, 2, 3, 0, 4).reshape(B, H, W, C)
+        y3 = self.proj(y2)
+        y4 = self.proj_drop(y3).permute(0, 3, 1, 2)
+        return y4
  
  
 def autopad(k, p=None, d=1):  # kernel, padding, dilation
@@ -71,8 +119,7 @@ class PSABlock(nn.Module):
     def __init__(self, c, attn_ratio=0.5, num_heads=4, shortcut=True) -> None:
         """Initializes the PSABlock with attention and feed-forward layers for enhanced feature extraction."""
         super().__init__()
- 
-        self.attn = SELayerV1(c)
+        self.attn = MultiDilatelocalAttention(c)
         self.ffn = nn.Sequential(Conv(c, c * 2, 1), Conv(c * 2, c, 1, act=False))
         self.add = shortcut
  
@@ -83,7 +130,7 @@ class PSABlock(nn.Module):
         return x
  
  
-class C2PSA_SENetV1(nn.Module):
+class C2PSA_MSDA(nn.Module):
     """
     C2PSA module with attention mechanism for enhanced feature extraction and processing.
     This module implements a convolutional block with attention mechanisms to enhance feature extraction and processing
@@ -126,7 +173,8 @@ if __name__ == "__main__":
     image = torch.rand(*image_size)
  
     # Model
-    mobilenet_v1 = C2PSA_SENetV1(64, 64)
+    mobilenet_v1 = C2PSA_MSDA(64, 64)
  
     out = mobilenet_v1(image)
     print(out.size())
+ 
