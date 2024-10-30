@@ -109,7 +109,9 @@ from ultralytics.nn.modules import (
     CoTAttention,
     PSAttention,
     SpatialGroupEnhance,
-    GSConv
+    GSConv,
+    ResBlock_CBAM
+
 
 
 
@@ -1081,7 +1083,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_ACmix,
             C2PSA_EMA,
             C2PSA_MSDA,
-            GSConv
+            GSConv,
+            ResBlock_CBAM
+
 
 
 
