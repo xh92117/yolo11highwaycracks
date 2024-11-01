@@ -47,6 +47,9 @@ from ultralytics.nn.modules.EMA import *
 
 
 
+from ultralytics.nn.modules.OREPA import *
+
+
 from ultralytics.nn.modules.MSDA import *
 
 from ultralytics.nn.modules.RCSOSA import *
@@ -1084,7 +1087,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_EMA,
             C2PSA_MSDA,
             GSConv,
-            ResBlock_CBAM
+            ResBlock_CBAM,
+            OREPA, 
+            C3k2_OREPA_backbone, 
+            C3k2_OREPA_neck
+
 
 
 
@@ -1134,7 +1141,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 RCSOSA, 
                 C3k2_DWRSeg,
                 C3k2_FasterBlock,
-                C3k2_AKConv
+                C3k2_AKConv,
+                C3k2_OREPA_backbone, 
+                C3k2_OREPA_neck
+
 
 
 
