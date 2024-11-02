@@ -116,7 +116,9 @@ from ultralytics.nn.modules import (
     PSAttention,
     SpatialGroupEnhance,
     GSConv,
-    ResBlock_CBAM
+    ResBlock_CBAM,
+    ASPP
+
 
 
 
@@ -1107,7 +1109,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ResBlock_CBAM,
             OREPA, 
             C3k2_OREPA_backbone, 
-            C3k2_OREPA_neck
+            C3k2_OREPA_neck,
+            ASPP
+
 
 
 
