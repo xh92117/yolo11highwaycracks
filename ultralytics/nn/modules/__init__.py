@@ -63,7 +63,9 @@ from .block import (
     CoTAttention,
     PSAttention,
     SpatialGroupEnhance,
-    ResBlock_CBAM
+    ResBlock_CBAM,
+    ASPP
+
 
 
 
@@ -181,7 +183,9 @@ __all__ = (
     "PSAttention",
     "SpatialGroupEnhance",
     "GSConv",
-    "ResBlock_CBAM"
+    "ResBlock_CBAM",
+    "ASPP"
+
 
 
 
