@@ -11,7 +11,7 @@
 import torch
 import torch.nn as nn
  
-__all__ = ['MLLAttention', 'PSAMLLA']
+__all__ = ['MLLAttention', 'C2PSAMLLA']
  
 class Mlp(nn.Module):
     def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0.):
@@ -190,7 +190,7 @@ class Conv(nn.Module):
         """Perform transposed convolution of 2D data."""
         return self.act(self.conv(x))
  
-class PSAMLLA(nn.Module):
+class C2PSAMLLA(nn.Module):
  
     def __init__(self, c1, c2, e=0.5):
         super().__init__()
