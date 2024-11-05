@@ -47,6 +47,9 @@ from ultralytics.nn.modules.EMA import *
 
 
 
+from ultralytics.nn.modules.RepNCSPELAN4 import *
+
+
 from ultralytics.nn.modules.OREPA import *
 from ultralytics.nn.modules.CGAttention import *
 
@@ -1116,7 +1119,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ASPP,
             C2PSA_CGA,
             C2PSAMLLA,
-            C2PSA_SEAM
+            C2PSA_SEAM,
+            RepNCSPELAN4_low, 
+            RepNCSPELAN4_high
+
 
 
 
