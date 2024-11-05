@@ -50,6 +50,9 @@ from ultralytics.nn.modules.EMA import *
 from ultralytics.nn.modules.OREPA import *
 from ultralytics.nn.modules.CGAttention import *
 
+from ultralytics.nn.modules.MLLA import *
+
+
 
 from ultralytics.nn.modules.MobileNetV4 import *
 
