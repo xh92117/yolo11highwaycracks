@@ -52,7 +52,7 @@ from ultralytics.nn.modules.CGAttention import *
 
 from ultralytics.nn.modules.MLLA import *
 
-
+from ultralytics.nn.modules.SEAM import *
 
 from ultralytics.nn.modules.MobileNetV4 import *
 
@@ -1115,7 +1115,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_OREPA_neck,
             ASPP,
             C2PSA_CGA,
-            C2PSAMLLA
+            C2PSAMLLA,
+            C2PSA_SEAM
+
 
 
 
@@ -1235,7 +1237,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM}:
             c2 = ch[f]
             args = [c2, *args]
    
