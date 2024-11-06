@@ -46,6 +46,9 @@ from ultralytics.nn.modules.AcMix import *
 from ultralytics.nn.modules.EMA import *
 
 
+from ultralytics.nn.modules.RepGFPN import *
+
+
 
 from ultralytics.nn.modules.RepNCSPELAN4 import *
 
@@ -1121,7 +1124,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSAMLLA,
             C2PSA_SEAM,
             RepNCSPELAN4_low, 
-            RepNCSPELAN4_high
+            RepNCSPELAN4_high,
+            CSPStage
+
 
 
 
@@ -1179,7 +1184,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_FasterBlock,
                 C3k2_AKConv,
                 C3k2_OREPA_backbone, 
-                C3k2_OREPA_neck
+                C3k2_OREPA_neck,
+                CSPStage
+
 
 
 
