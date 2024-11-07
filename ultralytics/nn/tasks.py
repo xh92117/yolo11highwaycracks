@@ -1361,6 +1361,9 @@ def guess_model_task(model):
             return "pose"
         if m == "obb":
             return "obb"
+        
+        else:
+            return 'detect'
 
     # Guess from model cfg
     if isinstance(model, dict):
@@ -1391,7 +1394,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect, WorldDetect, v10Detect)):
+            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead)):
                 return "detect"
 
     # Guess from model filename
