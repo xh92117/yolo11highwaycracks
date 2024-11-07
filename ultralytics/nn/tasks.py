@@ -52,7 +52,7 @@ from ultralytics.nn.modules.RepGFPN import *
 from ultralytics.nn.modules.ASFFHead import *
 
 
-from ultralytics.nn.modules.SCSA import *
+# from ultralytics.nn.modules.SCSA import *
 
 from ultralytics.nn.modules.C3k2_CAA import *
 
@@ -1135,7 +1135,6 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             RepNCSPELAN4_low, 
             RepNCSPELAN4_high,
             CSPStage,
-            C2PSASCSA,
             C3k2_CAA_v2,
             C3k2_CAA
 
@@ -1268,7 +1267,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM,  SCSA}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM}:
             c2 = ch[f]
             args = [c2, *args]
    
