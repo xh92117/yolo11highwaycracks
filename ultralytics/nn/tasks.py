@@ -52,6 +52,9 @@ from ultralytics.nn.modules.RepGFPN import *
 from ultralytics.nn.modules.ASFFHead import *
 
 
+
+from ultralytics.nn.modules.Detect_ASFF import *
+
 # from ultralytics.nn.modules.SCSA import *
 
 from ultralytics.nn.modules.C3k2_CAA import *
@@ -352,7 +355,7 @@ class BaseModel(nn.Module):
         """
         self = super()._apply(fn)
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             m.stride = fn(m.stride)
             m.anchors = fn(m.anchors)
             m.strides = fn(m.strides)
@@ -1231,7 +1234,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead}:
+        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect}:
             args.append([ch[x] for x in f])
             if m is Segment:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
