@@ -54,6 +54,10 @@ from ultralytics.nn.modules.ASFFHead import *
 
 from ultralytics.nn.modules.SCSA import *
 
+from ultralytics.nn.modules.C3k2_CAA import *
+
+
+
 
 from ultralytics.nn.modules.RepNCSPELAN4 import *
 
@@ -1131,7 +1135,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             RepNCSPELAN4_low, 
             RepNCSPELAN4_high,
             CSPStage,
-            C2PSASCSA
+            C2PSASCSA,
+            C3k2_CAA_v2,
+            C3k2_CAA
+
+
 
 
 
@@ -1192,7 +1200,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_AKConv,
                 C3k2_OREPA_backbone, 
                 C3k2_OREPA_neck,
-                CSPStage
+                CSPStage,
+                C3k2_CAA_v2,
+                C3k2_CAA
+
 
 
 
