@@ -31,6 +31,8 @@ from ultralytics.nn.modules.SENetV2 import *
 
 
 
+from ultralytics.nn.modules.AFPN4Head import *
+
 from ultralytics.nn.modules.FasterBlock import *
 
 
@@ -1234,7 +1236,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF}:
+        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head}:
             args.append([ch[x] for x in f])
             if m is Segment:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
