@@ -357,7 +357,7 @@ class BaseModel(nn.Module):
         """
         self = super()._apply(fn)
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead, Detect_ASFF)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             m.stride = fn(m.stride)
             m.anchors = fn(m.anchors)
             m.strides = fn(m.strides)
@@ -1413,7 +1413,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF)):
+            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head)):
                 return "detect"
 
     # Guess from model filename
