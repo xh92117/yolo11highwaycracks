@@ -32,6 +32,9 @@ from ultralytics.nn.modules.SENetV2 import *
 
 
 
+
+from ultralytics.nn.modules.EUCB import *
+
 from ultralytics.nn.modules.C3k2_DAttention import *
 
 
@@ -1289,7 +1292,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB}:
             c2 = ch[f]
             args = [c2, *args]
    
