@@ -32,6 +32,9 @@ from ultralytics.nn.modules.SENetV2 import *
 
 
 
+from ultralytics.nn.modules.C3k2_DAttention import *
+
+
 from ultralytics.nn.modules.DynamicHead import *
 
 
@@ -1148,7 +1151,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             RepNCSPELAN4_high,
             CSPStage,
             C3k2_CAA_v2,
-            C3k2_CAA
+            C3k2_CAA,
+            C3k2_DAttention_v2,
+            C3k2_DAttention
+
+
 
 
 
@@ -1213,7 +1220,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_OREPA_neck,
                 CSPStage,
                 C3k2_CAA_v2,
-                C3k2_CAA
+                C3k2_CAA,
+                C3k2_DAttention_v2,
+                C3k2_DAttention
+
 
 
 
