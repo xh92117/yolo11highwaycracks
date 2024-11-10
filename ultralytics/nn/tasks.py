@@ -31,7 +31,7 @@ from ultralytics.nn.modules.SENetV2 import *
 
 
 
-
+from ultralytics.nn.modules.FASFFHead import *
 
 from ultralytics.nn.modules.EUCB import *
 
@@ -370,7 +370,7 @@ class BaseModel(nn.Module):
         """
         self = super()._apply(fn)
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             m.stride = fn(m.stride)
             m.anchors = fn(m.anchors)
             m.strides = fn(m.strides)
@@ -1256,7 +1256,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head, AFPNHead}:
+        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head, AFPNHead,Detect_FASFF}:
             args.append([ch[x] for x in f])
             if m is Segment:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
@@ -1433,7 +1433,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head, AFPNHead)):
+            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head, AFPNHead,Detect_FASFF)):
                 return "detect"
 
     # Guess from model filename
