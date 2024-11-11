@@ -24,6 +24,9 @@ from ultralytics.nn.modules.FocalModulation import *
 
 
 
+from ultralytics.nn.modules.Dysample import *
+
+
 from ultralytics.nn.modules.TripletAttention import *
 
 
@@ -1301,7 +1304,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample}:
             c2 = ch[f]
             args = [c2, *args]
    
