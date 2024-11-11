@@ -31,7 +31,7 @@ from ultralytics.nn.modules.SENetV2 import *
 
 from ultralytics.nn.modules.iEMA import *
 
-
+from ultralytics.nn.modules.WTConv import *
 
 
 from ultralytics.nn.modules.FASFFHead import *
@@ -1160,7 +1160,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_CAA,
             C3k2_DAttention_v2,
             C3k2_DAttention,
-            C2PSAiEMA
+            C2PSAiEMA,
+            C3k2_WTConv
+
 
 
 
@@ -1230,7 +1232,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_CAA_v2,
                 C3k2_CAA,
                 C3k2_DAttention_v2,
-                C3k2_DAttention
+                C3k2_DAttention,
+                C3k2_WTConv
+
 
 
 
