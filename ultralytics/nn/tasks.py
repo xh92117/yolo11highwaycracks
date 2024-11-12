@@ -23,6 +23,9 @@ from ultralytics.nn.modules. DWRSeg import *
 from ultralytics.nn.modules.FocalModulation import *
 
 
+from ultralytics.nn.modules.SDI import *
+
+
 
 from ultralytics.nn.modules.Dysample import *
 
@@ -1312,6 +1315,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             m = m(*args)
             c2 = m.width_list  # 返回通道列表
             backbone = True
+
+        elif m is SDI:
+            args = [[ch[x] for x in f]]
+
 
 
         elif m in {BAMBlock}:
