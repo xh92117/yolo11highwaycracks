@@ -56,6 +56,9 @@ from ultralytics.nn.modules.C3k2_DAttention import *
 from ultralytics.nn.modules.AFPNHead import *
 
 
+
+from ultralytics.nn.modules.SlimNeck import *
+
 from ultralytics.nn.modules.AFPN4Head import *
 
 from ultralytics.nn.modules.FasterBlock import *
@@ -1171,7 +1174,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DAttention,
             C2PSAiEMA,
             C3k2_WTConv,
-            C2PSA_DLKA
+            C2PSA_DLKA,
+            VoVGSCSP, 
+            VoVGSCSPC, 
+            GSConv
+
 
 
 
@@ -1244,7 +1251,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_CAA,
                 C3k2_DAttention_v2,
                 C3k2_DAttention,
-                C3k2_WTConv
+                C3k2_WTConv,
+                VoVGSCSP, 
+                VoVGSCSPC
+
 
 
 
