@@ -27,6 +27,9 @@ from ultralytics.nn.modules.SDI import *
 
 
 
+from ultralytics.nn.modules.DeformableLKA import *
+
+
 from ultralytics.nn.modules.Dysample import *
 
 
@@ -1167,7 +1170,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DAttention_v2,
             C3k2_DAttention,
             C2PSAiEMA,
-            C3k2_WTConv
+            C3k2_WTConv,
+            C2PSA_DLKA
+
 
 
 
@@ -1307,7 +1312,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention}:
             c2 = ch[f]
             args = [c2, *args]
    
