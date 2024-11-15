@@ -26,6 +26,9 @@ from ultralytics.nn.modules.FocalModulation import *
 from ultralytics.nn.modules.SDI import *
 
 
+from ultralytics.nn.modules.IAFF import *
+
+
 
 from ultralytics.nn.modules.DeformableLKA import *
 
@@ -1177,7 +1180,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_DLKA,
             VoVGSCSP, 
             VoVGSCSPC, 
-            GSConv
+            GSConv,
+            C3k2_iAFF
+
 
 
 
@@ -1253,7 +1258,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_DAttention,
                 C3k2_WTConv,
                 VoVGSCSP, 
-                VoVGSCSPC
+                VoVGSCSPC,
+                C3k2_iAFF
+
 
 
 
