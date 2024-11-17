@@ -28,6 +28,9 @@ from ultralytics.nn.modules.SDI import *
 
 from ultralytics.nn.modules.IAFF import *
 
+from ultralytics.nn.modules.MDeformConv import *
+
+
 
 
 from ultralytics.nn.modules.DeformableLKA import *
@@ -1181,7 +1184,12 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             VoVGSCSP, 
             VoVGSCSPC, 
             GSConv,
-            C3k2_iAFF
+            C3k2_iAFF,
+            C3k2_MDConv1, 
+            C3k2_MDConv2,
+            ModulatedDeformConv2dPack
+
+
 
 
 
@@ -1259,7 +1267,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_WTConv,
                 VoVGSCSP, 
                 VoVGSCSPC,
-                C3k2_iAFF
+                C3k2_iAFF,
+                C3k2_MDConv1, 
+                C3k2_MDConv2,
+
 
 
 
