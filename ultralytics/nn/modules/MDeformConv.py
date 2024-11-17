@@ -7,7 +7,7 @@ from torch.autograd.function import once_differentiable
 from torch.nn.modules.utils import _pair, _single
 import importlib
  
-__all__ = ['C3k2_MDConv1', 'C3k2_MDConv2']
+__all__ = ['C3k2_MDConv1', 'C3k2_MDConv2','ModulatedDeformConv2dPack']
  
 ext_module  = importlib.import_module('mmcv.' + "_ext")
 class ModulatedDeformConv2dFunction(Function):
