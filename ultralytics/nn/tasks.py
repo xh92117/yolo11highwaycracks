@@ -31,6 +31,9 @@ from ultralytics.nn.modules.IAFF import *
 from ultralytics.nn.modules.MDeformConv import *
 
 
+from ultralytics.nn.modules.SCSA import *
+
+
 
 
 from ultralytics.nn.modules.DeformableLKA import *
@@ -1187,7 +1190,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_iAFF,
             C3k2_MDConv1, 
             C3k2_MDConv2,
-            ModulatedDeformConv2dPack
+            ModulatedDeformConv2dPack,
+            C2PSASCSA
+
 
 
 
@@ -1340,7 +1345,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA}:
             c2 = ch[f]
             args = [c2, *args]
    
