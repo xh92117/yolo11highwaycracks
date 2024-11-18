@@ -36,6 +36,9 @@ from ultralytics.nn.modules.SCSA import *
 
 
 
+from ultralytics.nn.modules.PPA import *
+
+
 from ultralytics.nn.modules.DeformableLKA import *
 
 
@@ -1191,7 +1194,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_MDConv1, 
             C3k2_MDConv2,
             ModulatedDeformConv2dPack,
-            C2PSASCSA
+            C2PSASCSA,
+            C3k2_PPA
+
 
 
 
@@ -1275,6 +1280,8 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_iAFF,
                 C3k2_MDConv1, 
                 C3k2_MDConv2,
+                C3k2_PPA
+
 
 
 
