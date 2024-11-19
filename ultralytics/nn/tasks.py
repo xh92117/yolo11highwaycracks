@@ -33,7 +33,7 @@ from ultralytics.nn.modules.MDeformConv import *
 
 from ultralytics.nn.modules.SCSA import *
 
-
+from ultralytics.nn.modules.RCM import *
 
 
 from ultralytics.nn.modules.PPA import *
@@ -1195,7 +1195,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_MDConv2,
             ModulatedDeformConv2dPack,
             C2PSASCSA,
-            C3k2_PPA
+            C3k2_PPA,
+            C3k2_RCM
+
 
 
 
@@ -1280,7 +1282,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_iAFF,
                 C3k2_MDConv1, 
                 C3k2_MDConv2,
-                C3k2_PPA
+                C3k2_PPA,
+                C3k2_RCM
+
 
 
 
@@ -1364,7 +1368,8 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is SDI:
             args = [[ch[x] for x in f]]
 
-
+        elif m is RCM :
+            args = [ch[f]]
 
         elif m in {BAMBlock}:
             c1, c2 = ch[f], args[0]
