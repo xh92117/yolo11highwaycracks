@@ -45,6 +45,8 @@ from ultralytics.nn.modules.DeformableLKA import *
 from ultralytics.nn.modules.Dysample import *
 
 
+from ultralytics.nn.modules.MSAA import *
+
 from ultralytics.nn.modules.TripletAttention import *
 
 
@@ -1367,6 +1369,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
         elif m is SDI:
             args = [[ch[x] for x in f]]
+        
+
+        elif m is MSAA:
+            args = [[ch[f],ch[f]]
+          
 
         elif m is RCM :
             args = [ch[f]]
