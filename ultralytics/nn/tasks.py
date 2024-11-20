@@ -1372,7 +1372,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         
 
         elif m is MSAA:
-            args = [[ch[f],ch[f]]
+            args = [ch[f],ch[f]]
           
 
         elif m is RCM :
