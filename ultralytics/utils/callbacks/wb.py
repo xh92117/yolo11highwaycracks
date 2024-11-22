@@ -13,7 +13,7 @@ try:
 
 except (ImportError, AssertionError):
     wb = None
-
+wb = None   #这一行，新增的代码，，其余与原文件夹的内容相同，
 
 def _custom_table(x, y, classes, title="Precision Recall Curve", x_title="Recall", y_title="Precision"):
     """
