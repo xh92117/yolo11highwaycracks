@@ -22,6 +22,10 @@ from ultralytics.nn.modules. DWRSeg import *
 
 from ultralytics.nn.modules.FocalModulation import *
 
+from ultralytics.nn.modules.ASSA import *
+
+
+
 
 from ultralytics.nn.modules.SDI import *
 
@@ -1198,7 +1202,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ModulatedDeformConv2dPack,
             C2PSASCSA,
             C3k2_PPA,
-            C3k2_RCM
+            C3k2_RCM,
+            C2PSA_ASSA
+
 
 
 
@@ -1285,7 +1291,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_MDConv1, 
                 C3k2_MDConv2,
                 C3k2_PPA,
-                C3k2_RCM
+                C3k2_RCM,
+                C2PSA_ASSA
+
 
 
 
@@ -1374,6 +1382,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is MSAA:
             args = [ch[f],ch[f]]
           
+        elif m is WindowAttention_ASSA:
+            args = [ch[f]]
+
 
         elif m is RCM :
             args = [ch[f]]
