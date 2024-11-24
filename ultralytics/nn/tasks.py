@@ -25,7 +25,7 @@ from ultralytics.nn.modules.FocalModulation import *
 # from ultralytics.nn.modules.ASSA import *
 
 
-
+from ultralytics.nn.modules.LDConv import *
 
 from ultralytics.nn.modules.SDI import *
 
@@ -1202,7 +1202,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ModulatedDeformConv2dPack,
             C2PSASCSA,
             C3k2_PPA,
-            C3k2_RCM
+            C3k2_RCM,
+            LDConv, 
+            C3k2_LDConv1, 
+            C3k2_LDConv2
+
             
 
 
@@ -1291,7 +1295,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_MDConv1, 
                 C3k2_MDConv2,
                 C3k2_PPA,
-                C3k2_RCM
+                C3k2_RCM,
+                C3k2_LDConv1, 
+                C3k2_LDConv2
+
                 
 
 
