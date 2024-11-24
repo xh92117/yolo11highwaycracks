@@ -1203,7 +1203,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSASCSA,
             C3k2_PPA,
             C3k2_RCM,
-            C2PSA_ASSA
+            C3k2_WAtt_ASSA
 
 
 
@@ -1292,7 +1292,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_MDConv2,
                 C3k2_PPA,
                 C3k2_RCM,
-                C2PSA_ASSA
+                C3k2_WAtt_ASSA
 
 
 
