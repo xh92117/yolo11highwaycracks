@@ -17,6 +17,10 @@ from ultralytics.nn.modules.Biformer import *
 from ultralytics.nn.modules.DAttention import *
 
 
+
+
+from ultralytics.nn.modules.DynamicDCNv3Head import *
+
 from ultralytics.nn.modules. DWRSeg import *
 
 
