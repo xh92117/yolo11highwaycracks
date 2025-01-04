@@ -9,6 +9,8 @@ from mmcv.ops.modulated_deform_conv import ModulatedDeformConv2d, modulated_defo
 import torch_dct as dct
 from ultralytics.utils.tal import dist2bbox, make_anchors
  
+__all__ =['FADDWConvHead']
+
  
 class OmniAttention(nn.Module):
     def __init__(self, in_planes, out_planes, kernel_size, groups=1, reduction=0.0625, kernel_num=4, min_channel=16):
