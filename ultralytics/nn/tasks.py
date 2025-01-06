@@ -17,7 +17,7 @@ from ultralytics.nn.modules.Biformer import *
 from ultralytics.nn.modules.DAttention import *
 
 
-
+from ultralytics.nn.modules.StarNet import *
 
 from ultralytics.nn.modules.AdaptiveDilatedDWConvHead import *
 
