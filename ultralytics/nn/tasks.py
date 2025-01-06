@@ -1331,6 +1331,13 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 n = 1
             if m is C3k2 and scale in "mlx":  # for M/L/X sizes
                 args[3] = True
+        
+        elif m in {starnet_s1, starnet_s2, starnet_s3, starnet_s4, starnet_s050, starnet_s100, starnet_s150}:
+            m = m(*args)
+            c2 = m.width_list  # 返回通道列表
+            backbone = True
+
+
         elif m is AIFI:
             args = [ch[f], *args]
         elif m in {HGStem, HGBlock}:
