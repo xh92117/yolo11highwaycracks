@@ -23,6 +23,10 @@ from ultralytics.nn.modules.AdaptiveDilatedDWConvHead import *
 
 
 
+from ultralytics.nn.modules.attention import SKAttention
+
+
+
 from ultralytics.nn.modules.DynamicDCNv3Head import *
 
 from ultralytics.nn.modules. DWRSeg import *
@@ -1213,7 +1217,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_RCM,
             LDConv, 
             C3k2_LDConv1, 
-            C3k2_LDConv2
+            C3k2_LDConv2,
+            SKAttention
+
 
             
 
