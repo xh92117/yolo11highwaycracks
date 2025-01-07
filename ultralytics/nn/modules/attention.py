@@ -3,6 +3,9 @@
 from torch.nn import init
 from collections import OrderedDict
 from ultralytics.nn.modules.conv import Conv
+import torch
+import torch.nn as nn
+
  
  
 class SKAttention(nn.Module):
