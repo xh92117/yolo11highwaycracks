@@ -23,6 +23,9 @@ from ultralytics.nn.modules.AdaptiveDilatedDWConvHead import *
 
 
 
+from ultralytics.nn.modules.DSAM import C2PSA_DSAM,DSAM
+
+
 from ultralytics.nn.modules.attention import SKAttention
 
 
@@ -1218,7 +1221,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             LDConv, 
             C3k2_LDConv1, 
             C3k2_LDConv2,
-            SKAttention
+            SKAttention,
+            C2PSA_DSAM
+
 
 
             
@@ -1311,7 +1316,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_PPA,
                 C3k2_RCM,
                 C3k2_LDConv1, 
-                C3k2_LDConv2
+                C3k2_LDConv2,
+                C2PSA_DSAM
+
 
                 
 
@@ -1346,6 +1353,14 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
         elif m is AIFI:
             args = [ch[f], *args]
+        ####attention  innovata
+        elif m is DSAM:
+            c1, c2 = ch[f], args[0]
+            if c2 != nc:
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, *args[1:]]
+        ####attention  innovata
+
         elif m in {HGStem, HGBlock}:
             c1, cm, c2 = ch[f], args[0], args[1]
             args = [c1, cm, c2, *args[2:]]
