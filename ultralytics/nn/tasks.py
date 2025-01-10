@@ -21,6 +21,9 @@ from ultralytics.nn.modules.StarNet import *
 
 from ultralytics.nn.modules.AdaptiveDilatedDWConvHead import *
 
+from ultralytics.nn.modules.LANet import C3k2_EFAttention
+
+
 
 
 from ultralytics.nn.modules.DSAM import C2PSA_DSAM,DSAM
@@ -1227,7 +1230,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_LDConv2,
             SKAttention,
             C2PSA_DSAM,
-            CoordAtt
+            CoordAtt,
+            C3k2_EFAttention
+
 
 
 
@@ -1323,7 +1328,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_RCM,
                 C3k2_LDConv1, 
                 C3k2_LDConv2,
-                C2PSA_DSAM
+                C2PSA_DSAM,
+                C3k2_EFAttention
+
 
 
                 
