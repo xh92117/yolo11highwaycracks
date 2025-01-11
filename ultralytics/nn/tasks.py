@@ -25,6 +25,9 @@ from ultralytics.nn.modules.LANet import C3k2_EFAttention
 
 
 
+from ultralytics.nn.modules.GFPN import CSPStage
+
+
 from ultralytics.nn.modules.SHViT import C3k2_SHSA
 
 
@@ -1234,7 +1237,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_DSAM,
             CoordAtt,
             C3k2_EFAttention,
-            C3k2_SHSA
+            C3k2_SHSA,
+            CSPStage
+
 
 
 
