@@ -121,7 +121,7 @@ from ultralytics.nn.modules.AcMix import *
 from ultralytics.nn.modules.EMA import *
 
 
-from ultralytics.nn.modules.RepGFPN import *
+# from ultralytics.nn.modules.RepGFPN import *
 
 
 from ultralytics.nn.modules.ASFFHead import *
@@ -1212,7 +1212,6 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_SEAM,
             RepNCSPELAN4_low, 
             RepNCSPELAN4_high,
-            CSPStage,
             C3k2_CAA_v2,
             C3k2_CAA,
             C3k2_DAttention_v2,
