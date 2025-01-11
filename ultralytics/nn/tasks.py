@@ -27,6 +27,8 @@ from ultralytics.nn.modules.LANet import C3k2_EFAttention
 from ultralytics.nn.modules.iAFF import iAFF,AFF
 
 
+from ultralytics.nn.modules.DEANet import CGAFusion
+
 
 from ultralytics.nn.modules.GFPN import CSPStage
 
@@ -1413,6 +1415,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             c2 = ch[f[-1]]
         elif m is Concat_BiFPN:
             c2 = sum(ch[x] for x in f)
+       
+        elif m is CGAFusion:
+            c2 = ch[f[1]]
+            args = [c2, *args]
 
 
         elif m is SpatialGroupEnhance:
