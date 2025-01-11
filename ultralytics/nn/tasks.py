@@ -24,6 +24,9 @@ from ultralytics.nn.modules.AdaptiveDilatedDWConvHead import *
 from ultralytics.nn.modules.LANet import C3k2_EFAttention
 
 
+from ultralytics.nn.modules.iAFF import iAFF,AFF
+
+
 
 from ultralytics.nn.modules.GFPN import CSPStage
 
@@ -1436,6 +1439,13 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             c2 = ch[f]
             args = [c2, *args]
    
+
+        elif m in {iAFF, AFF}:
+            channels = [ch[x] for x in f]
+            c2 = channels[0]       # output of the iAFF module ( output channel is eighter of the channels)
+            args = [c2]
+
+
         elif m in {MobileNetV4ConvLarge, MobileNetV4ConvSmall, MobileNetV4ConvMedium, MobileNetV4HybridMedium, MobileNetV4HybridLarge}:
             m = m(*args)
             c2 = m.width_list  # 返回通道列表
