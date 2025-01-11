@@ -25,6 +25,8 @@ from ultralytics.nn.modules.LANet import C3k2_EFAttention
 
 
 
+from ultralytics.nn.modules.SHViT import C3k2_SHSA
+
 
 from ultralytics.nn.modules.DSAM import C2PSA_DSAM,DSAM
 
@@ -1231,7 +1233,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             SKAttention,
             C2PSA_DSAM,
             CoordAtt,
-            C3k2_EFAttention
+            C3k2_EFAttention,
+            C3k2_SHSA
+
 
 
 
@@ -1329,7 +1333,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_LDConv1, 
                 C3k2_LDConv2,
                 C2PSA_DSAM,
-                C3k2_EFAttention
+                C3k2_EFAttention,
+                C3k2_SHSA
+
 
 
 
