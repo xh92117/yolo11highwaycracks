@@ -27,6 +27,9 @@ from ultralytics.nn.modules.LANet import C3k2_EFAttention
 from ultralytics.nn.modules.iAFF import iAFF,AFF
 
 
+from ultralytics.nn.modules.tsdn import C3k2_DTAB
+
+
 from ultralytics.nn.modules.DEANet import CGAFusion
 
 
@@ -1242,7 +1245,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             CoordAtt,
             C3k2_EFAttention,
             C3k2_SHSA,
-            CSPStage
+            CSPStage,
+            C3k2_DTAB
+
 
 
 
@@ -1343,7 +1348,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_LDConv2,
                 C2PSA_DSAM,
                 C3k2_EFAttention,
-                C3k2_SHSA
+                C3k2_SHSA,
+                C3k2_DTAB
+
 
 
 
