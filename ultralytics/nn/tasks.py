@@ -46,6 +46,8 @@ from ultralytics.nn.modules.attention import SKAttention
 
 
 
+from ultralytics.nn.modules.DEANet_SWS import CGAFusion_SWS
+
 
 from ultralytics.nn.modules.CoordAtt import CoordAtt
 
@@ -1467,6 +1469,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is SDI:
             args = [[ch[x] for x in f]]
         
+
+        elif m is CGAFusion_SWS:
+            c2 = ch[f[1]]
+            args = [c2, *args]
+
 
         elif m is MSAA:
             args = [ch[f],ch[f]]
