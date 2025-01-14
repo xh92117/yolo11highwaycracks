@@ -45,6 +45,8 @@ from ultralytics.nn.modules.DSAM import C2PSA_DSAM,DSAM
 from ultralytics.nn.modules.attention import SKAttention
 
 
+from ultralytics.nn.modules.DA_Net import DualAttentionBlock,C3k2_DAB
+
 
 from ultralytics.nn.modules.DEANet_SWS import CGAFusion_SWS
 
@@ -1248,7 +1250,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_EFAttention,
             C3k2_SHSA,
             CSPStage,
-            C3k2_DTAB
+            C3k2_DTAB,
+            DualAttentionBlock,
+            C3k2_DAB
+
 
 
 
@@ -1351,7 +1356,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C2PSA_DSAM,
                 C3k2_EFAttention,
                 C3k2_SHSA,
-                C3k2_DTAB
+                C3k2_DTAB,
+                C3k2_DAB
+
 
 
 
