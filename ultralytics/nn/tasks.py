@@ -14,6 +14,9 @@ import torch.nn as nn
 from ultralytics.nn.modules.Biformer import *
 
 
+from ultralytics.nn.modules.BiFormer_CBAM  import C2PSA_BSAM,BSAM
+
+
 from ultralytics.nn.modules.DAttention import *
 
 
@@ -1252,7 +1255,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             CSPStage,
             C3k2_DTAB,
             DualAttentionBlock,
-            C3k2_DAB
+            C3k2_DAB,
+            C2PSA_BSAM
+
 
 
 
@@ -1357,7 +1362,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_EFAttention,
                 C3k2_SHSA,
                 C3k2_DTAB,
-                C3k2_DAB
+                C3k2_DAB,
+                C2PSA_BSAM
+
 
 
 
@@ -1405,6 +1412,15 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [c1, *args[1:]]
         ####attention  innovata
 
+        ####attention  innovata
+        elif m is BSAM:
+            c1, c2 = ch[f], args[0]
+            if c2 != nc:
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, *args[1:]]
+        ####attention  innovata
+
+  
         elif m in {HGStem, HGBlock}:
             c1, cm, c2 = ch[f], args[0], args[1]
             args = [c1, cm, c2, *args[2:]]
