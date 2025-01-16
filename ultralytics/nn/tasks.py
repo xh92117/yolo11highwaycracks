@@ -17,6 +17,10 @@ from ultralytics.nn.modules.Biformer import *
 from ultralytics.nn.modules.BiFormer_CBAM  import C2PSA_BSAM,BSAM
 
 
+
+from ultralytics.nn.modules.SPPF_attention import SPPF_attention
+
+
 from ultralytics.nn.modules.DAttention import *
 
 
@@ -1256,7 +1260,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DTAB,
             DualAttentionBlock,
             C3k2_DAB,
-            C2PSA_BSAM
+            C2PSA_BSAM,
+            SPPF_attention
+
 
 
 
