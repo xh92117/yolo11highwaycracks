@@ -23,7 +23,7 @@ from ultralytics.nn.modules.CPCA import CPCA
 from ultralytics.nn.modules.debiformer import DeBiLevelRoutingAttention,C2PSA_DBRA
 
 
-from ultralytics.nn.modules.kan_conv import C3k2_KAN
+# from ultralytics.nn.modules.kan_conv import C3k2_KAN
 
 
 from ultralytics.nn.modules.SPPF_attention import SPPF_attention
