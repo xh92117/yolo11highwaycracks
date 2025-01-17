@@ -17,6 +17,8 @@ from ultralytics.nn.modules.Biformer import *
 from ultralytics.nn.modules.BiFormer_CBAM  import C2PSA_BSAM,BSAM
 
 
+from ultralytics.nn.modules.debiformer import DeBiLevelRoutingAttention,C2PSA_DBRA
+
 
 from ultralytics.nn.modules.SPPF_attention import SPPF_attention
 
@@ -1261,7 +1263,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             DualAttentionBlock,
             C3k2_DAB,
             C2PSA_BSAM,
-            SPPF_attention
+            SPPF_attention,
+            DeBiLevelRoutingAttention,C2PSA_DBRA
+
 
 
 
@@ -1369,7 +1373,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_SHSA,
                 C3k2_DTAB,
                 C3k2_DAB,
-                C2PSA_BSAM
+                C2PSA_BSAM,
+                C2PSA_DBRA
+
 
 
 
