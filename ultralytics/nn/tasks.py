@@ -29,6 +29,8 @@ from ultralytics.nn.modules.debiformer import DeBiLevelRoutingAttention,C2PSA_DB
 
 
 
+from ultralytics.nn.modules.deformable_attention_2d import DeformableAttention2D
+
 
 from ultralytics.nn.modules.APConv import C3k2_AP,PConv
 # from ultralytics.nn.modules.kan_conv import C3k2_KAN
@@ -1282,7 +1284,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             CPCA,
             C3k2_AP,PConv,
             DoubleAttention,
-            CAFMAttention
+            CAFMAttention,
+            DeformableAttention2D
+
 
 
 
