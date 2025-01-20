@@ -28,6 +28,8 @@ from ultralytics.nn.modules.HCANet import CAFMAttention
 from ultralytics.nn.modules.debiformer import DeBiLevelRoutingAttention,C2PSA_DBRA
 
 
+from ultralytics.nn.modules.MLCA import MLCA
+
 
 from ultralytics.nn.modules.deformable_attention_2d import DeformableAttention2D
 
@@ -1285,7 +1287,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_AP,PConv,
             DoubleAttention,
             CAFMAttention,
-            DeformableAttention2D
+            DeformableAttention2D,
+            MLCA
+
 
 
 
