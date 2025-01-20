@@ -19,6 +19,9 @@ from ultralytics.nn.modules.BiFormer_CBAM  import C2PSA_BSAM,BSAM
 from ultralytics.nn.modules.CPCA import CPCA
 
 
+from ultralytics.nn.modules.SimAM import SimAM
+
+
 from ultralytics.nn.modules.DoubleAttention import DoubleAttention
 
 
@@ -1288,7 +1291,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             DoubleAttention,
             CAFMAttention,
             DeformableAttention2D,
-            MLCA
+            MLCA,
+            SimAM
+
 
 
 
