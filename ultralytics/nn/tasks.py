@@ -13,6 +13,9 @@ import torch.nn as nn
 
 from ultralytics.nn.modules.Biformer import *
 
+from ultralytics.nn.modules.mcattn import MoCAttention
+
+
 
 from ultralytics.nn.modules.BiFormer_CBAM  import C2PSA_BSAM,BSAM
 
@@ -1292,7 +1295,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             CAFMAttention,
             DeformableAttention2D,
             MLCA,
-            SimAM
+            SimAM,
+            MoCAttention
+
 
 
 
