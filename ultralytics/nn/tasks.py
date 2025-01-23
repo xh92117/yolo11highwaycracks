@@ -15,7 +15,7 @@ from ultralytics.nn.modules.Biformer import *
 
 from ultralytics.nn.modules.mcattn import MoCAttention
 
-
+from ultralytics.nn.modules.BFAM import *
 
 from ultralytics.nn.modules.BiFormer_CBAM  import C2PSA_BSAM,BSAM
 
@@ -1296,7 +1296,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             DeformableAttention2D,
             MLCA,
             SimAM,
-            MoCAttention
+            MoCAttention,
+            C3k2_BFAM_1, C3k2_BFAM_2
+
 
 
 
@@ -1415,7 +1417,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_DAB,
                 C2PSA_BSAM,
                 C2PSA_DBRA,
-                C3k2_AP
+                C3k2_AP,
+                C3k2_BFAM_1, C3k2_BFAM_2
+
 
                 
 
