@@ -24,6 +24,9 @@ from ultralytics.nn.modules.CPCA import CPCA
 from ultralytics.nn.modules.HCFNetblocks import PPA
 
 
+from ultralytics.nn.modules.DFF import *
+
+
 
 from ultralytics.nn.modules.SimAM import SimAM
 
@@ -1301,7 +1304,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             SimAM,
             MoCAttention,
             C3k2_BFAM_1, C3k2_BFAM_2,
-            PPA
+            PPA,
+            C3k2_DFF_1,
+            C3k2_DFF_2
 
 
 
@@ -1423,7 +1428,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C2PSA_BSAM,
                 C2PSA_DBRA,
                 C3k2_AP,
-                C3k2_BFAM_1, C3k2_BFAM_2
+                C3k2_BFAM_1, C3k2_BFAM_2,
+                C3k2_DFF_1,
+                C3k2_DFF_2
+
 
 
                 
