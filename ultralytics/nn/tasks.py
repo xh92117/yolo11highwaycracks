@@ -24,6 +24,9 @@ from ultralytics.nn.modules.CPCA import CPCA
 from ultralytics.nn.modules.HCFNetblocks import PPA
 
 
+from ultralytics.nn.modules.DICAM import *
+
+
 from ultralytics.nn.modules.DFF import *
 
 
@@ -1546,7 +1549,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM}:
             c2 = ch[f]
             args = [c2, *args]
    
