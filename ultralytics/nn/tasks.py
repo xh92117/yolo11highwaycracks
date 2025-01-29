@@ -24,6 +24,9 @@ from ultralytics.nn.modules.CPCA import CPCA
 from ultralytics.nn.modules.HCFNetblocks import PPA
 
 
+from ultralytics.nn.modules.BiFPN import *
+
+
 from ultralytics.nn.modules.DICAM import *
 
 
@@ -1568,6 +1571,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is SDI:
             args = [[ch[x] for x in f]]
         
+      
+        elif m is Bi_FPN:
+            length = len([ch[x] for x in f])
+            args = [length]
 
         elif m is CGAFusion_SWS:
             c2 = ch[f[1]]
