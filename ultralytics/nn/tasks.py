@@ -33,6 +33,9 @@ from ultralytics.nn.modules.DICAM import *
 from ultralytics.nn.modules.DFF import *
 
 
+from ultralytics.nn.modules.CSPPC import *
+
+
 
 from ultralytics.nn.modules.SimAM import SimAM
 
@@ -1312,7 +1315,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_BFAM_1, C3k2_BFAM_2,
             PPA,
             C3k2_DFF_1,
-            C3k2_DFF_2
+            C3k2_DFF_2,
+            C3k2_PConv1, 
+            C3k2_PConv2
+
 
 
 
@@ -1436,7 +1442,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_AP,
                 C3k2_BFAM_1, C3k2_BFAM_2,
                 C3k2_DFF_1,
-                C3k2_DFF_2
+                C3k2_DFF_2,
+                C3k2_PConv1, 
+                C3k2_PConv2
+
 
 
 
