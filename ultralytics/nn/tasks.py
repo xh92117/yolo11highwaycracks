@@ -23,7 +23,7 @@ from ultralytics.nn.modules.CPCA import CPCA
 
 from ultralytics.nn.modules.HCFNetblocks import PPA
 
-from ultralytics.nn.modules.HSFPN import PPA
+from ultralytics.nn.modules.HSFPN import *
 
 
 
