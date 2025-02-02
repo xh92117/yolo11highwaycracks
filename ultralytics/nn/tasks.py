@@ -23,6 +23,9 @@ from ultralytics.nn.modules.CPCA import CPCA
 
 from ultralytics.nn.modules.HCFNetblocks import PPA
 
+from ultralytics.nn.modules.HSFPN import PPA
+
+
 
 from ultralytics.nn.modules.BiFPN import *
 
@@ -1317,7 +1320,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DFF_1,
             C3k2_DFF_2,
             C3k2_PConv1, 
-            C3k2_PConv2
+            C3k2_PConv2,
+            nn.Conv2d
+
 
 
 
@@ -1561,7 +1566,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA}:
             c2 = ch[f]
             args = [c2, *args]
    
@@ -1593,7 +1598,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is MSAA:
             args = [ch[f],ch[f]]
           
-        
+        elif m is multiply:
+            c2 = ch[f[0]]
+        elif m is Add:
+            c2 = ch[f[-1]]
 
 
         elif m is RCM :
