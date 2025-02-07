@@ -26,6 +26,9 @@ from ultralytics.nn.modules.HCFNetblocks import PPA
 from ultralytics.nn.modules.HSFPN import *
 
 
+from ultralytics.nn.modules.StripRCNN import C3k2_Strip,StripBlock
+
+
 
 from ultralytics.nn.modules.BiFPN import *
 
@@ -1321,7 +1324,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DFF_2,
             C3k2_PConv1, 
             C3k2_PConv2,
-            nn.Conv2d
+            nn.Conv2d,
+            C3k2_Strip,StripBlock
+
 
 
 
@@ -1449,7 +1454,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_DFF_1,
                 C3k2_DFF_2,
                 C3k2_PConv1, 
-                C3k2_PConv2
+                C3k2_PConv2,
+                C3k2_Strip
+
 
 
 
