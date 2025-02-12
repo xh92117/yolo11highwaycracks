@@ -28,7 +28,7 @@ from ultralytics.nn.modules.HSFPN import *
 
 from ultralytics.nn.modules.StripRCNN import C3k2_Strip,StripBlock
 
-
+from ultralytics.nn.modules.CAA import *
 
 from ultralytics.nn.modules.BiFPN import *
 
@@ -1325,7 +1325,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_PConv1, 
             C3k2_PConv2,
             nn.Conv2d,
-            C3k2_Strip,StripBlock
+            C3k2_Strip,StripBlock,
+            C2PSA_CAA
+
 
 
 
@@ -1573,7 +1575,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA, CAA}:
             c2 = ch[f]
             args = [c2, *args]
    
