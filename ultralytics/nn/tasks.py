@@ -27,7 +27,7 @@ from ultralytics.nn.modules.HSFPN import *
 
 from ultralytics.nn.modules.CACSYOLO import C3k2_CACS
 
-
+from ultralytics.nn.modules.EFC import *
 
 
 from ultralytics.nn.modules.StripRCNN import C3k2_Strip,StripBlock
@@ -1620,6 +1620,13 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         elif m is Add:
             c2 = ch[f[-1]]
 
+        elif m is EFC:
+            c1, c2 = ch[f[0]], args[0]
+            c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, c2]
+
+
+   
 
         elif m is RCM :
             args = [ch[f]]
