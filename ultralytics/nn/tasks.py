@@ -47,6 +47,9 @@ from ultralytics.nn.modules.CSPPC import *
 
 
 
+from ultralytics.nn.modules.EVC import EVCBlock
+
+
 from ultralytics.nn.modules.SimAM import SimAM
 
 
@@ -1562,6 +1565,14 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             c2 = ch[f[1]]
             args = [c2, *args]
 
+
+        elif m is EVCBlock:
+            c2=make_divisible(min(args[0], max_channels) * width, 8)
+            args = [ch[f],c2]
+            print(args)
+
+
+  
 
         elif m is SpatialGroupEnhance:
             c1, c2 = ch[f], args[0]
