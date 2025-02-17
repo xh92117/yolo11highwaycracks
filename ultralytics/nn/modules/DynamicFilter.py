@@ -10,8 +10,8 @@ from typing import Optional, Callable, Union
 from einops import rearrange, reduce
 from ultralytics.nn.modules.conv import Conv, DWConv, RepConv, GhostConv, autopad
 from ultralytics.nn.modules.block import C3k2,C3k
-from ultralytics.nn.modules.metaformer.py import MetaFormerBlock
-
+from ultralytics.nn.modules.metaformer import MetaFormerBlock
+from timm.layers import CondConv2d, trunc_normal_, use_fused_attn, to_2tuple
 __all__ =['C3k2_DynamicFilter']
 
 def resize_complex_weight(origin_weight, new_h, new_w):
