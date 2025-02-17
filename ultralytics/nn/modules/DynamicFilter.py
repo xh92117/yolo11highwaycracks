@@ -9,8 +9,8 @@ from functools import partial
 from typing import Optional, Callable, Union
 from einops import rearrange, reduce
 from ultralytics.nn.modules.conv import Conv, DWConv, RepConv, GhostConv, autopad
-from ultralytics.nn.modules.block import *
-
+from ultralytics.nn.modules.block import C3k2,C3k
+from ultralytics.nn.modules.metaformer.py import MetaFormerBlock
 
 def resize_complex_weight(origin_weight, new_h, new_w):
     h, w, num_heads = origin_weight.shape[0:3]  # size, w, c, 2
