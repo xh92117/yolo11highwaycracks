@@ -2,7 +2,7 @@ import math
 import torch
 import torch.nn as nn
 from ultralytics.nn.modules.conv import autopad, Conv
-__all__ = ['C3k2_ESSAttn']
+__all__ = ['ESSAttn','C3k2_ESSAttn']
 class ESSAttn(nn.Module):
     def __init__(self, dim):
         super().__init__()
