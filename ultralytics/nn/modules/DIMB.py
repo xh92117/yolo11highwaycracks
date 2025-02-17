@@ -74,6 +74,13 @@ class DynamicIncMixerBlock(nn.Module):
         x = x + self.drop_path(self.layer_scale_2.unsqueeze(-1).unsqueeze(-1) * self.mlp(self.norm2(x)))
         return x
 
+
+
+
+
+
+
+
 class C3k_DCMB(C3k):
     def __init__(self, c1, c2, n=1, shortcut=False, g=1, e=0.5, k=3):
         super().__init__(c1, c2, n, shortcut, g, e, k)
