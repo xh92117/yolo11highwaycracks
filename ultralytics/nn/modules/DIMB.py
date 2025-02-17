@@ -9,7 +9,7 @@ from functools import partial
 from typing import Optional, Callable, Union
 from einops import rearrange, reduce
 from ultralytics.nn.modules.conv import *
-from ultralytics.nn.modules.block import *
+from ultralytics.nn.modules.block import C3k2,C3k
 
 __all__ =['C3k2_DCMB']
 
@@ -56,6 +56,38 @@ class DynamicInceptionMixer(nn.Module):
         x_group = torch.cat([self.convs[i](x_group[i]) for i in range(len(self.convs))], dim=1)
         x = self.conv_1x1(x_group)
         return x
+
+class ConvolutionalGLU(nn.Module):
+    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0.) -> None:
+        super().__init__()
+        out_features = out_features or in_features
+        hidden_features = hidden_features or in_features
+        hidden_features = int(2 * hidden_features / 3)
+        self.fc1 = nn.Conv2d(in_features, hidden_features * 2, 1)
+        self.dwconv = nn.Sequential(
+            nn.Conv2d(hidden_features, hidden_features, kernel_size=3, stride=1, padding=1, bias=True, groups=hidden_features),
+            act_layer()
+        )
+        self.fc2 = nn.Conv2d(hidden_features, out_features, 1)
+        self.drop = nn.Dropout(drop)
+    
+    # def forward(self, x):
+    #     x, v = self.fc1(x).chunk(2, dim=1)
+    #     x = self.dwconv(x) * v
+    #     x = self.drop(x)
+    #     x = self.fc2(x)
+    #     x = self.drop(x)
+    #     return x
+
+    def forward(self, x):
+        x_shortcut = x
+        x, v = self.fc1(x).chunk(2, dim=1)
+        x = self.dwconv(x) * v
+        x = self.drop(x)
+        x = self.fc2(x)
+        x = self.drop(x)
+        return x_shortcut + x
+
 
 class DynamicIncMixerBlock(nn.Module):
     def __init__(self, dim, drop_path=0.0):
