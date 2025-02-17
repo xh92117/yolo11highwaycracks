@@ -30,6 +30,12 @@ from ultralytics.nn.modules.CACSYOLO import C3k2_CACS
 from ultralytics.nn.modules.EFC import *
 
 
+from ultralytics.nn.modules.DIMB import *
+
+
+
+
+
 from ultralytics.nn.modules.ODConv import *
 
 from ultralytics.nn.modules.StripRCNN import C3k2_Strip,StripBlock
@@ -1342,7 +1348,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_CACS,
             C3k2_ODConv, ODConv2d,
             C3k2_ESSAttn,
-            ESSAttn
+            ESSAttn,
+            C3k2_DCMB
+
 
 
 
@@ -1480,7 +1488,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_Strip,
                 C3k2_CACS,
                 C3k2_ODConv,
-                C3k2_ESSAttn
+                C3k2_ESSAttn,
+                C3k2_DCMB
+
 
 
 
