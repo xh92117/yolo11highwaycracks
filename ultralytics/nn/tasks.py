@@ -48,7 +48,7 @@ from ultralytics.nn.modules.DFF import *
 from ultralytics.nn.modules.CSPPC import *
 
 
-from ultralytics.nn.modules.ESSAttn import C3k2_ESSAttn
+from ultralytics.nn.modules.ESSAttn import *
 
 
 
@@ -1341,7 +1341,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2PSA_CAA,
             C3k2_CACS,
             C3k2_ODConv, ODConv2d,
-            C3k2_ESSAttn
+            C3k2_ESSAttn,
+            ESSAttn
+
 
 
 
