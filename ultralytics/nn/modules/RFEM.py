@@ -9,7 +9,7 @@ from functools import partial
 from typing import Optional, Callable, Union
 from einops import rearrange, reduce
 from ultralytics.nn.modules.conv import *
-from ultralytics.nn.modules.block import C2f,C3
+from ultralytics.nn.modules.block import C2f,C3,C3k
 
 __all__ =['C3k2_RFEM']
 
