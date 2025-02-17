@@ -35,6 +35,11 @@ from ultralytics.nn.modules.DIMB import *
 from ultralytics.nn.modules.DynamicFilter import C3k2_DynamicFilter
 
 
+from ultralytics.nn.modules.RFEM import C3k2_RFEM
+
+
+
+
 
 from ultralytics.nn.modules.ODConv import *
 
@@ -1350,7 +1355,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_ESSAttn,
             ESSAttn,
             C3k2_DCMB,
-            C3k2_DynamicFilter
+            C3k2_DynamicFilter,
+            C3k2_RFEM
+
 
 
 
@@ -1492,7 +1499,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C3k2_ODConv,
                 C3k2_ESSAttn,
                 C3k2_DCMB,
-                C3k2_DynamicFilter
+                C3k2_DynamicFilter,
+                C3k2_RFEM
+
 
 
 
