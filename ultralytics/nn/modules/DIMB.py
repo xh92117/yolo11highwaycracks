@@ -8,7 +8,7 @@ import numpy as np
 from functools import partial
 from typing import Optional, Callable, Union
 from einops import rearrange, reduce
-from ..modules.conv import Conv, DWConv, DSConv, RepConv, GhostConv, autopad
+from ultralytics.nn.modules.conv import Conv, DWConv, DSConv, RepConv, GhostConv, autopad
 __all__ =['C3k2_DCMB']
 
 class DynamicInceptionDWConv2d(nn.Module):
