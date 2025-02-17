@@ -9,7 +9,7 @@ from functools import partial
 from typing import Optional, Callable, Union
 from einops import rearrange, reduce
 from ..modules.conv import Conv, DWConv, DSConv, RepConv, GhostConv, autopad
-all=['C3k2_DCMB']
+__all__ =['C3k2_DCMB']
 
 class DynamicInceptionDWConv2d(nn.Module):
     """ Dynamic Inception depthweise convolution
