@@ -16,6 +16,8 @@ from ultralytics.nn.modules.conv import Conv, DWConv
 from ultralytics.nn.modules.transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
 # from ultralytics.utils import bias_init_with_prob, linear_init
 
+
+__all__ = ['Detect_ScConvHead']
  
 class GroupBatchnorm2d(nn.Module):
     def __init__(self, c_num: int,
@@ -140,12 +142,12 @@ class ScConv(nn.Module):
 
 
 
-__all__ = ['Detect_ScConvHead']
 
 
 
 
-class Detect_PConvHead(nn.Module):
+
+class Detect_ScConvHead(nn.Module):
     """YOLOv8 Detect head for detection models."""
 
     dynamic = False  # force grid reconstruction
