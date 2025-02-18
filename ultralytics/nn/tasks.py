@@ -189,7 +189,10 @@ from ultralytics.nn.modules.C3k2_DAttention import *
 
 from ultralytics.nn.modules.AFPNHead import *
 
-from ultralytics.nn.modules.DyHeadBlock import *
+# from ultralytics.nn.modules.DyHeadBlock import *
+
+from ultralytics.nn.modules.PConvHead import *
+
 
 from ultralytics.nn.modules.SlimNeck import *
 
@@ -519,7 +522,7 @@ class BaseModel(nn.Module):
         """
         self = super()._apply(fn)
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_DyHeadBlock)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             m.stride = fn(m.stride)
             m.anchors = fn(m.anchors)
             m.strides = fn(m.strides)
@@ -585,7 +588,7 @@ class DetectionModel(BaseModel):
 
         # Build strides
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_DyHeadBlock)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             s = 640  # 2x min stride
             m.inplace = self.inplace
 
@@ -1584,7 +1587,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_DyHeadBlock}:
+        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead}:
             args.append([ch[x] for x in f])
             if m is Segment:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
@@ -1811,7 +1814,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_DyHeadBlock)):
+            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead)):
                 return "detect"
 
     # Guess from model filename
