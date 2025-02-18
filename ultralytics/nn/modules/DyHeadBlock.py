@@ -15,7 +15,7 @@ from ultralytics.nn.modules.conv import Conv, DWConv
 from ultralytics.nn.modules.transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
 from ultralytics.utils import bias_init_with_prob, linear_init
 
-__all__ = ["Detect_DyHeadBlock"]
+__all__ = ['Detect_DyHeadBlock']
 
 
 def _make_divisible(v, divisor, min_value=None):
