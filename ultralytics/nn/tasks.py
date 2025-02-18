@@ -189,7 +189,7 @@ from ultralytics.nn.modules.C3k2_DAttention import *
 
 from ultralytics.nn.modules.AFPNHead import *
 
-
+from ultralytics.nn.modules.DyHeadBlock import *
 
 from ultralytics.nn.modules.SlimNeck import *
 
