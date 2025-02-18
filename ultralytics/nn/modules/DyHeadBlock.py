@@ -7,13 +7,13 @@ import math
 import torch
 import torch.nn as nn
 from torch.nn.init import constant_, xavier_uniform_
-
+import torch.nn.functional as F
 from ultralytics.utils.tal import TORCH_1_10, dist2bbox, dist2rbox, make_anchors
 
 from ultralytics.nn.modules.block import DFL, BNContrastiveHead, ContrastiveHead, Proto
 from ultralytics.nn.modules.conv import Conv, DWConv
 from ultralytics.nn.modules.transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
-from ultralytics.utils import bias_init_with_prob, linear_init
+# from ultralytics.utils import bias_init_with_prob, linear_init
 
 __all__ = ['Detect_DyHeadBlock']
 
