@@ -11,6 +11,10 @@ import torch
 import torch.nn as nn
 
 
+
+from ultralytics.nn.modules.FCAttention import FCAttention
+
+
 from ultralytics.nn.modules.Biformer import *
 
 from ultralytics.nn.modules.mcattn import MoCAttention
@@ -1554,6 +1558,15 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             m = m(*args)
             c2 = m.width_list  # 返回通道列表
             backbone = True
+         
+ 
+       # 新增代码 ------------------------------------------------------
+        elif m is FCAttention:
+           c1 = ch[f]         # 输入通道数
+           c2 = c1            # 输出通道数 (FCAttention不改变通道维度)
+           args = [c1]        # 参数列表需与 FCAttention.__init__(self, channel, b=1, gamma=2) 匹配
+
+
 
 
         elif m is AIFI:
