@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 
 
-
+from ultralytics.nn.modules.scSE import scSE
 from ultralytics.nn.modules.FCAttention import FCAttention
 from ultralytics.nn.modules.DSConvHead import Detect_DSConvHead
 
@@ -1648,7 +1648,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA, CAA}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA, CAA, scSE}:
             c2 = ch[f]
             args = [c2, *args]
    
