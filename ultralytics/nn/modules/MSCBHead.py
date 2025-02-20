@@ -225,31 +225,24 @@ class Detect_MSCBHead(nn.Module):
         self.no = nc + self.reg_max * 4  # number of outputs per anchor
         self.stride = torch.zeros(self.nl)  # strides computed during build
         c2, c3 = max((16, ch[0] // 4, self.reg_max * 4)), max(ch[0], min(self.nc, 100))  # channels
-   # ------------------ 修改 cv2 模块 ------------------
+        # cv2: 用于边界框预测，替换为 MSCB（支持多尺度深度可分卷积）
         self.cv2 = nn.ModuleList(
-            nn.Sequential(
-                DEConv(x),                    # 替换原始 Conv
-                Conv(x, c2, 1),               # 通道适配
-                Conv(c2, c2, 3),              # 保留原有结构
-                nn.Conv2d(c2, 4 * self.reg_max, 1)
-            ) for x in ch
+            nn.Sequential(MSCB(in_channels=x, out_channels=c2, kernel_sizes=[1, 3, 5], expansion_factor=2),
+        nn.Conv2d(c2, 4 * self.reg_max, 1)  # 输出维度与 YOLOv11 原来的设计保持一致
         )
+         for x in ch
+         )
+
+
+
         # ------------------ 修改 cv3 模块 ------------------
         self.cv3 = nn.ModuleList(
-            nn.Sequential(
-                nn.Sequential(
-                    DWConv(x, x, 3), 
-                    DEConv(x),                # 替换原始 Conv
-                    Conv(x, c3, 1)            # 通道适配
-                ),
-                nn.Sequential(
-                    DWConv(c3, c3, 3), 
-                    DEConv(c3),               # 替换原始 Conv
-                    Conv(c3, c3, 1)
-                ),
-                nn.Conv2d(c3, self.nc, 1),
-            ) for x in ch
+            nn.Sequential(MSCB(in_channels=x, out_channels=c3, kernel_sizes=[1, 3, 5], expansion_factor=2),
+           nn.Conv2d(c3, self.nc, 1)  # 输出维度为分类类别数
+         ) for x in ch
         )
+
+
         self.dfl = DFL(self.reg_max) if self.reg_max > 1 else nn.Identity()
 
         if self.end2end:
