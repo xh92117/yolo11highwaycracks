@@ -2,6 +2,15 @@ import math
 import torch
 from torch import nn
 from einops.layers.torch import Rearrange
+import copy
+from torch.nn.init import constant_, xavier_uniform_
+import torch.nn.functional as F
+from ultralytics.utils.tal import TORCH_1_10, dist2bbox, dist2rbox, make_anchors
+
+from ultralytics.nn.modules.block import DFL, BNContrastiveHead, ContrastiveHead, Proto
+from ultralytics.nn.modules.conv import Conv, DWConv
+from ultralytics.nn.modules.transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
+
 
 # 论文：DEA-Net: Single image dehazing based on detail-enhanced convolution and content-guided attention
 # Github地址：https://github.com/cecret3350/DEA-Net
