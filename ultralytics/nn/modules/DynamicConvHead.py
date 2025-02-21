@@ -62,7 +62,7 @@ class DynamicConv(nn.Module):
         x = self.cond_conv(x, routing_weights)
         return x
  
- class Detect_DynamicConvHead(nn.Module):
+class Detect_DynamicConvHead(nn.Module):
     """YOLOv8 Detect head for detection models."""
 
     dynamic = False  # force grid reconstruction
