@@ -10,6 +10,9 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
+
+from ultralytics.nn.modules.MBConvHead import Detect_MBConvHead
+
 from ultralytics.nn.modules.DynamicConvHead import Detect_DynamicConvHead
 from ultralytics.nn.modules.MSCBHead import Detect_MSCBHead
 from ultralytics.nn.modules.DEConvHead import Detect_DEConvHead
@@ -528,7 +531,7 @@ class BaseModel(nn.Module):
         """
         self = super()._apply(fn)
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead,Detect_MBConvHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             m.stride = fn(m.stride)
             m.anchors = fn(m.anchors)
             m.strides = fn(m.strides)
@@ -594,7 +597,7 @@ class DetectionModel(BaseModel):
 
         # Build strides
         m = self.model[-1]  # Detect()
-        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
+        if isinstance(m, (Detect,ASFFHead, Detect_ASFF,AFPN4Head,AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead,Detect_MBConvHead)):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             s = 640  # 2x min stride
             m.inplace = self.inplace
 
@@ -1602,7 +1605,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead}:
+        elif m in {Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect,ASFFHead, Detect_ASFF, AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead,Detect_MBConvHead}:
             args.append([ch[x] for x in f])
             if m is Segment:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
@@ -1829,7 +1832,7 @@ def guess_model_task(model):
                 return "pose"
             elif isinstance(m, OBB):
                 return "obb"
-            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead)):
+            elif isinstance(m, (Detect, WorldDetect, v10Detect,ASFFHead,Detect_ASFF,AFPN4Head, AFPNHead,Detect_FASFF,DynamicDCNv3Head,FADDWConvHead,Detect_PConvHead,Detect_ScConvHead,Detect_DualConvHead,Detect_DSConvHead,Detect_DEConvHead,Detect_MSCBHead,Detect_DynamicConvHead,Detect_MBConvHead)):
                 return "detect"
 
     # Guess from model filename
