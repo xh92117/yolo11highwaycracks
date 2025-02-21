@@ -73,16 +73,28 @@ class DynamicConv(nn.Module):
         self.no = nc + self.reg_max * 4  # number of outputs per anchor
         self.stride = torch.zeros(self.nl)  # strides computed during build
         c2, c3 = max((16, ch[0] // 4, self.reg_max * 4)), max(ch[0], min(self.nc, 100))  # channels
+        # 改进点1: 在cv2中插入DynamicConv
         self.cv2 = nn.ModuleList(
-            nn.Sequential(Conv(x, c2, 3), Conv(c2, c2, 3), nn.Conv2d(c2, 4 * self.reg_max, 1)) for x in ch
+            nn.Sequential(
+                DynamicConv(x, c2, kernel_size=3, num_experts=4),  # 替换首个Conv
+                Conv(c2, c2, 3),                                    # 保持传统Conv
+                nn.Conv2d(c2, 4 * self.reg_max, 1)
+            ) for x in ch
         )
+        
+        # 改进点2: 在cv3的DWConv后添加DynamicConv
         self.cv3 = nn.ModuleList(
             nn.Sequential(
-                nn.Sequential(DWConv(x, x, 3), Conv(x, c3, 1)),
-                nn.Sequential(DWConv(c3, c3, 3), Conv(c3, c3, 1)),
-                nn.Conv2d(c3, self.nc, 1),
-            )
-            for x in ch
+                nn.Sequential(
+                    DWConv(x, x, 3),
+                    DynamicConv(x, c3, kernel_size=1, num_experts=4)  # 替代原Conv
+                ),
+                nn.Sequential(
+                    DWConv(c3, c3, 3), 
+                    DynamicConv(c3, c3, kernel_size=1, num_experts=4) # 替代原Conv
+                ),
+                nn.Conv2d(c3, self.nc, 1)
+            ) for x in ch
         )
         self.dfl = DFL(self.reg_max) if self.reg_max > 1 else nn.Identity()
 
