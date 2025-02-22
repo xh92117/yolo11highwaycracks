@@ -10,7 +10,7 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
-
+from ultralytics.nn.modules.YOLOMS import MSBlock
 from ultralytics.nn.modules.MBConvHead import Detect_MBConvHead
 
 from ultralytics.nn.modules.DynamicConvHead import Detect_DynamicConvHead
@@ -1368,7 +1368,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ESSAttn,
             C3k2_DCMB,
             C3k2_DynamicFilter,
-            C3k2_RFEM
+            C3k2_RFEM,
+            MSBlock
+
 
 
 
