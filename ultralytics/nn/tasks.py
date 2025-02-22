@@ -10,6 +10,9 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
+
+from ultralytics.nn.modules.hyperyolo import HyperComputeModule,MANet
+
 from ultralytics.nn.modules.YOLOMS import MSBlock
 from ultralytics.nn.modules.MBConvHead import Detect_MBConvHead
 
@@ -1218,7 +1221,12 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
         if not scale:
             scale = tuple(scales.keys())[0]
             LOGGER.warning(f"WARNING ⚠️ no model scale passed. Assuming scale='{scale}'.")
-        depth, width, max_channels = scales[scale]
+        # depth, width, max_channels = scales[scale]
+        if len(scales[scale]) == 3:
+            depth, width, max_channels = scales[scale]
+        elif len(scales[scale]) == 4:
+            depth, width, max_channels, threshold = scales[scale]
+
 
     if act:
         Conv.default_act = eval(act)  # redefine default activation, i.e. Conv.default_act = nn.SiLU()
@@ -1369,7 +1377,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DCMB,
             C3k2_DynamicFilter,
             C3k2_RFEM,
-            MSBlock
+            MSBlock,
+            MANet
+
 
 
 
@@ -1574,7 +1584,10 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
            args = [c1]        # 参数列表需与 FCAttention.__init__(self, channel, b=1, gamma=2) 匹配
 
 
-
+        elif m is HyperComputeModule:
+            c1, c2 = ch[f], args[0]
+            c2 = make_divisible(min(c2, max_channels) * width, 8)
+            args = [c1, c2, threshold]
 
         elif m is AIFI:
             args = [ch[f], *args]
