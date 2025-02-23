@@ -1,0 +1,79 @@
+# Ultralytics YOLO 🚀, AGPL-3.0 license
+# YOLO11-Hyper object detection model with improved HyperC2Net+MANet
+
+# Parameters
+nc: 80  # number of classes
+scales:  
+  # [depth, width, max_channels, threshold]
+  n: [0.50, 0.25, 1024, 6]  
+  s: [0.50, 0.50, 1024, 8]
+  m: [0.50, 1.00, 512, 10]
+  l: [1.00, 1.00, 512, 10]
+  x: [1.00, 1.50, 512, 12]
+
+# Enhanced YOLO11-Hyper backbone
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv, [64, 3, 2]]  # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]]  # 1-P2/4
+  
+  # Enhanced Feature Extraction Block 1
+  - [-1, 1, MANet, [128, True, 2, 3]]  # 2
+  - [-1, 2, C3k2, [256, False, 0.25]]  # 3
+  - [-1, 1, Conv, [256, 3, 2]]  # 4-P3/8
+  
+  # Enhanced Feature Extraction Block 2  
+  - [-1, 1, MANet, [256, True, 2, 3]]  # 5
+  - [-1, 2, C3k2, [512, False, 0.25]]  # 6
+  - [-1, 1, Conv, [512, 3, 2]]  # 7-P4/16
+  
+  # Enhanced Feature Extraction Block 3
+  - [-1, 1, MANet, [512, True, 2, 3]]  # 8
+  - [-1, 2, C3k2, [512, True]]  # 9
+  - [-1, 1, Conv, [1024, 3, 2]]  # 10-P5/32
+  
+  # Multi-scale Feature Fusion
+  - [-1, 2, C3k2, [1024, True]]  # 11
+  - [-1, 1, SPPF, [1024, 5]]  # 12
+  - [-1, 2, C2PSA, [1024]]  # 13
+
+# Enhanced YOLO11-Hyper head
+head:
+  # Multi-scale Semantic Collection
+  - [0, 1, nn.AvgPool2d, [8, 8, 0]]  # 14
+  - [3, 1, nn.AvgPool2d, [4, 4, 0]]  # 15
+  - [6, 1, nn.AvgPool2d, [2, 2, 0]]  # 16
+  - [13, 1, nn.Upsample, [None, 2, 'nearest']]  # 17
+  - [[14, 15, 16, 9, 17], 1, Concat, [1]]  # 18
+  
+  # Enhanced Hypergraph Computation
+  - [-1, 1, Conv, [512, 1, 1]]  # 19
+  - [-1, 1, HyperComputeModule, [512]]  # 20
+  - [-1, 1, MANet, [512, True, 2, 3]]  # 21
+  - [-1, 1, HyperComputeModule, [512]]  # 22
+  - [-1, 2, MANet, [512, True, 2, 3]]  # 23
+
+  # Advanced Semantic Integration
+  - [-1, 1, nn.AvgPool2d, [2, 2, 0]]  # 24
+  - [[-1, 13], 1, Concat, [1]]  # 25
+  - [-1, 1, Conv, [1024, 1, 1]]  # 26-P5
+  
+  # Enhanced Feature Pyramid
+  - [[23, 9], 1, Concat, [1]]  # 27
+  - [-1, 2, C3k2, [512, False]]  # 28
+  
+  - [23, 1, nn.Upsample, [None, 2, 'nearest']]  # 29
+  - [[-1, 6], 1, Concat, [1]]  # 30
+  - [-1, 2, C3k2, [256, False]]  # 31-P3/8
+  
+  # Cross-scale Feature Enhancement
+  - [-1, 1, Conv, [256, 3, 2]]  # 32
+  - [[-1, 28], 1, Concat, [1]]  # 33
+  - [-1, 2, C3k2, [512, False]]  # 34-P4/16
+  
+  - [-1, 1, Conv, [512, 3, 2]]  # 35
+  - [[-1, 26], 1, Concat, [1]]  # 36
+  - [-1, 2, C3k2, [1024, True]]  # 37-P5/32
+
+  # Final Detection
+  - [[31, 34, 37], 1, Detect, [nc]]  # Detect(P3, P4, P5)
