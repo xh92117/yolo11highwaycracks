@@ -11,6 +11,9 @@ import torch
 import torch.nn as nn
 
 
+
+from ultralytics.nn.modules.LCA import *
+
 from ultralytics.nn.modules.hyperyolo import HyperComputeModule,MANet
 
 from ultralytics.nn.modules.YOLOMS import MSBlock
@@ -1378,7 +1381,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C3k2_DynamicFilter,
             C3k2_RFEM,
             MSBlock,
-            MANet
+            MANet,
+            C2PSA_LCA
+
 
 
 
@@ -1668,7 +1673,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
 
 
 
-        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA, CAA, scSE}:
+        elif m in {BiLevelRoutingAttention, DAttentionBaseline, FocalModulation, TripletAttention, SELayerV2, ACmix,  EMA, MultiDilatelocalAttention,  LocalWindowAttention, MLLAttention, SEAM, EUCB, iEMA, Dy_Sample,  deformable_LKA_Attention, SCSA, DICAM, CA, CAA, scSE, LCA}:
             c2 = ch[f]
             args = [c2, *args]
    
