@@ -234,7 +234,6 @@ def bbox_iou(box1, box2, xywh=True, ratio=1, GIoU=False, DIoU=False, CIoU=False,
     else:
         return iou  # IoU
 
-
 def mask_iou(mask1, mask2, eps=1e-7):
     """
     Calculate masks IoU.
