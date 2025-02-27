@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 
 
-
+from ultralytics.nn.modules.APConvatt import PConv_att
 from ultralytics.nn.modules.LCA import *
 from ultralytics.nn.modules.CLCA import *
 from ultralytics.nn.modules.hyperyolo import HyperComputeModule,MANet
@@ -1383,7 +1383,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             MSBlock,
             MANet,
             C2PSA_LCA,
-            C2PSA_CLCA
+            C2PSA_CLCA,
+            PConv_att
+
 
 
 
