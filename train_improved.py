@@ -53,7 +53,7 @@ def main(args):
 
     # 打印改进配置
     LOGGER.info('正在使用以下改进:')
-    LOGGER.info(f'- 高级图像增强: {"✓" if args.enable_augment else "✗"}')
+    LOGGER.info(f'- 高级图像增强: {"✓" if args.custom_augment else "✗"}')
     LOGGER.info(f'- 注意力机制: {args.attention}')
     LOGGER.info(f'- 分割头: {"✓" if args.segment else "✗"}')
     LOGGER.info(f'- 组合损失函数: {"✓" if args.combined_loss else "✗"}')
