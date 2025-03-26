@@ -29,7 +29,7 @@ def parse_args():
     parser.add_argument('--name', default='exp', help='实验名称')
 
     # 改进开关
-    parser.add_argument('--enable_augment', action='store_true', help='启用高级图像增强')
+    parser.add_argument('--custom_augment', action='store_true', help='启用高级图像增强')
     parser.add_argument('--attention', type=str, choices=['none', 'cbam', 'ema'], default='ema',
                         help='使用注意力机制类型 (none, cbam, ema)')
     parser.add_argument('--segment', action='store_true', default=True, help='启用分割头')
@@ -66,7 +66,7 @@ def main(args=None):
     # 打印改进配置
     LOGGER.info('正在使用以下改进:')
     LOGGER.info(f'- 基础模型: YOLO11')
-    LOGGER.info(f'- 高级图像增强: {"✓" if args.enable_augment else "✗"}')
+    LOGGER.info(f'- 高级图像增强: {"✓" if args.custom_augment else "✗"}')
     LOGGER.info(f'- 注意力机制: {args.attention}')
     LOGGER.info(f'- 分割头: {"✓" if args.segment else "✗"}')
     LOGGER.info(f'- 组合损失函数: {"✓" if args.combined_loss else "✗"}')
@@ -117,7 +117,7 @@ if __name__ == '__main__':
     #     'model': 'ultralytics/cfg/models/11/yolo11-SegHead.yaml',
     #     'epochs': 300,
     #     'batch': 16,
-    #     'enable_augment': True,
+    #     'custom_augment': True,
     #     'attention': 'ema',
     #     'segment': True,
     #     'combined_loss': True,
